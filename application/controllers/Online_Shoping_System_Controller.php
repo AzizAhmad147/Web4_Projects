@@ -8,6 +8,7 @@ class Online_Shoping_System_Controller extends CI_Controller{
 	   $this->load->helper('url');
 	  $this->load->model('Online_Shoping_System_Model');
       $this->load->library('session');
+      $this->load->helper('language');
 	}
 
 
@@ -15,6 +16,8 @@ class Online_Shoping_System_Controller extends CI_Controller{
 		$this->load->view('Online_Shoping_System_View');
 
     }
+
+   
   
 
     function logout(){
@@ -56,8 +59,54 @@ class Online_Shoping_System_Controller extends CI_Controller{
 	function create_category(){
         $save = $this->input->post(); 
         $this->Online_Shoping_System_Model->new_category($save);
+        redirect('Online_Shoping_System_Controller/read_category');
+
     
 	}	
+    public function read_category()
+
+
+    {
+        
+        $this->load->library('pagination');
+        $config['base_url'] = 'http://localhost/Web4_Projects/index.php/Online_Shoping_System_Controller/read_category';
+        $config['total_rows'] = $this->Online_Shoping_System_Model->CatCount();
+        $config['per_page'] =2;
+        $config['uri_segment'] =3;
+        $config['full_tag_open'] = '<ul class="pagination pagination-lg">';
+        $config['full_tag_close'] = '</ul>';
+        $config['attributes'] = array('class' => 'page_link');
+        $config['first_link'] = 'اولی';
+        $config['last_link'] = 'آخری';
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = 'قبلی';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = 'بعدی';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><a href="#" class="page-link">';
+        $config['cur_tag_close'] = '<span class="sr-only">(فعلی)</span></a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $page = ($this->uri->segment(3));
+        $this->pagination->initialize($config);
+        $read['link'] = $this->pagination->create_links();
+        $read['categories'] = $this->Online_Shoping_System_Model->get_category2($config['per_page'], $page);
+        //print_r($read['mens']);
+        $read['page']="AllCategorry";
+        $this->_main($read);
+        
+    }
+    public function delete_category($id)
+    {
+       $this->Online_Shoping_System_Model->remove_category($id);
+       redirect('Online_Shoping_System_Controller/read_category');
+    }
+
 	
 	public function create_customer()
 	{
@@ -103,15 +152,7 @@ class Online_Shoping_System_Controller extends CI_Controller{
 		//redirect('posts/get_posts');
 	}
 
-		public function read_category()
-	{
-		$read['Category'] = $this->Online_Shoping_System_Model->get_category();
-		$read['page']="AddItem";
-		$this->_main($read);
-		
-		
-		
-	}
+	
 	function create_subcategory(){
     $save = $this->input->post(); 
      $this->Online_Shoping_System_Model->new_subcategory($save);
@@ -158,10 +199,13 @@ class Online_Shoping_System_Controller extends CI_Controller{
                  }
 
               public function read_men()
+
+
 	{
-		        $this->load->library('pagination');
+        
+		$this->load->library('pagination');
         $config['base_url'] = 'http://localhost/Web4_Projects/index.php/Online_Shoping_System_Controller/read_men';
-        $config['total_rows'] = $this->Online_Shoping_System_Model->MenCount();
+        $config['total_rows'] = $this->Online_Shoping_System_Model->CatCount();
         $config['per_page'] =2;
         $config['uri_segment'] =3;
         $config['full_tag_open'] = '<ul class="pagination pagination-lg">';
@@ -381,25 +425,14 @@ class Online_Shoping_System_Controller extends CI_Controller{
                 
 
                 }
+                else{
+                    echo "no uploaded";
+                }
+
                 
         }
 
-	/*function check_user(){
-		$uname = $this->input->post('UserName');
-		$pass= $this->input->post('Password');
-		$user= $this->user_model->user_login($uname,$pass);
-		if($user){
-			//$this->session->sess_destroy();
-			$this->session->set_userdata('check_user',true);
-			$this->session->set_userdata('user',$user->UserId);
-			print_r($this->session->userdata());
-			
-		}
-		else {
-			$this->load->view('Online_Shoping_System_View');
-			//$this->check_user();
-		}
-	}*/
+	
 
 
 	public function add_user()
@@ -415,7 +448,7 @@ class Online_Shoping_System_Controller extends CI_Controller{
 		$this->_main($read);
 
 
-		//$this->load->view('AllUser',$read);
+	
 
 	}
 	function  _main($data){
@@ -488,6 +521,13 @@ class Online_Shoping_System_Controller extends CI_Controller{
         $data['results'] = $this->Online_Shoping_System_Model->searchbyname($name);
         
         $this->load->view('view_info', $data);
+    }
+
+    function lang($lang){
+        //$this->lang->load('main',$lang);
+        $this->session->set_userdata('lang',$lang);
+        //$this->load->view('lang_test');
+        redirect($this->session->userdata('last_visited'));
     }
 
 }

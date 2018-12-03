@@ -78,8 +78,7 @@
                                 <ul class="nav child_menu">
                                 
                                     <li><a href="additem">مردانه</a></li>
-                                    <li><a href="addwomen">زنانه</a></li>
-                                    <li><a href="addchildren">طفلانه</a></li>
+                                   
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-eye"></i> دیدن بخش ها <span
@@ -88,6 +87,7 @@
                                 
                                     <li><a href="read_user" >دیدن تمام کاربر ها</a></li>
                                     <li><a href="read_customer">دیدن تمام مشتریان</a></li>
+                                    <li><a href="read_category">دیدن تمام کتگوری ها</a></li>
 
                                 </ul>
                             </li>
@@ -102,24 +102,7 @@
                                 </ul>
                             </li>
 
-                            <li><a><i class="fa fa-edit"></i>بخش فاکتور ها <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="e_commerce.html">فاکتور خرید</a></li>
-                                    <li><a href="projects.html">فاکتور فروش</a></li>
-                                    <li><a href="project_detail.html">دیدن فاکتور خرید</a></li>
-                                    <li><a href="contacts.html">دیدن فاکتور فروش</a></li>
-
-                                </ul>
-                            </li>
-                            <li><a><i class="fa fa-search"></i>جستجو <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="MSearch">جستجوی کالا</a></li>
-                                    <li><a href="projects.html">جستجوی مشتری</a></li>
-                                    <li><a href="project_detail.html">جستجوی فاکتور خرید</a></li>
-                                    <li><a href="contacts.html">جستجوی فاکتور فروش</a></li>
-
-                                </ul>
-                            </li>
+                        
                              <li><a><i class="fa fa-table"></i> کالا های فروخته شده <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="tables.html">تمام کالا ها</a></li>
@@ -136,8 +119,7 @@
                                 </ul>
                             </li>
 
-                             <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> صفحه هات اضافی <span
-                            class="label label-success pull-left">به زودی</span></a></li>
+                            
 
                         </ul>
                     </div>
@@ -174,6 +156,9 @@
                     </div>
 
                     <ul class="nav navbar-nav navbar-right" >
+
+  
+
                         <li>
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false" >
@@ -260,8 +245,11 @@
                                         </a>
                                     </div>
                                 </li>
+
                             </ul>
                         </li>
+                         
+                          
                     </ul>
                 </nav>
             </div>
@@ -280,6 +268,7 @@
             echo "کدام صفحه انتخاب نشده";
         }
       */
+        
 
     $this->load->view($page);
 

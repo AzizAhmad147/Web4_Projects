@@ -87,13 +87,7 @@
 								<a href="?page=shop">فروشگاه</a>
 							</li>
 
-							<li class="sale-noti">
-								<a href="?page=shop">فروش</a>
-							</li>
-
-							<li>
-								<a href="?page=card">سهولت ها</a>
-							</li>
+						
 
 							<li>
 								<a href="?page=blog">وبلاگ</a>
@@ -105,7 +99,11 @@
 
 							<li>
 								<a href="?page=contact">تماس با ما</a>
-							</li>
+							</li> 
+
+								<li>
+								<a href="?page=card">ثبت نام</a>
+							</li> 
 						</ul>
 					</nav>
 				</div>

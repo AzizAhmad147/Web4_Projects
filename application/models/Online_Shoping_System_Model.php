@@ -26,10 +26,7 @@ class Online_Shoping_System_Model extends  CI_Model{
 	function new_category($save){
 
 		   $query = $this->mongoci->db->Category->insert($save);
-           if($query=='1')
-		   {
-			   echo "موفقانه ثبت شد!";
-		   }
+           return $query;
 		
 	}
 
@@ -49,7 +46,14 @@ class Online_Shoping_System_Model extends  CI_Model{
 		}
 			function MenCount(){
 
-	       return $this->mongoci->db->Mens->count();
+	       return $this->mongoci->db->Items->count();
+
+	     
+
+	}
+		function CatCount(){
+
+	       return $this->mongoci->db->Category->count();
 
 	     
 
@@ -64,6 +68,20 @@ class Online_Shoping_System_Model extends  CI_Model{
 			return $data;
 
 		}
+		public function get_category2($x,$y)
+		{
+			   
+
+			$query = $this->mongoci->db->Category->find()->limit($x)->skip($y);
+
+            return $this->mongo_cursor($query);
+		}
+			public function remove_category($id)
+		{
+			$where = array('_id'=> new MongoId($id));
+			$this->mongoci->db->Category->remove($where);				
+		}
+
 				public function remove_customer($id)
 		{
 			$where = array('_id'=> new MongoId($id));
@@ -103,12 +121,12 @@ class Online_Shoping_System_Model extends  CI_Model{
 	}
 	function new_item($save){
 
-		   $query = $this->mongoci->db->Mens->insert($save);
+		   $query = $this->mongoci->db->Items->insert($save);
 		   return $query;
            
 		   }
 
-		   public function remove_men($id)
+		   public function remove_item($id)
 		{
 			$where = array('_id'=> new MongoId($id));
 			$this->mongoci->db->Mens->remove($where);				
@@ -122,38 +140,33 @@ class Online_Shoping_System_Model extends  CI_Model{
 		   public function get_women($x,$y)
 		{
 
-         //  $this->mongoci->db->limit($limit, $start);
-			$query = $this->mongoci->db->Womens->find()->limit($x)->skip($y);
+       
+			$query = $this->mongoci->db->Items->find()->limit($x)->skip($y);
 
             return $this->mongo_cursor($query);
 		}
 
 		   			function WomenCount(){
 
-	       return $this->mongoci->db->Womens->count();
+	       return $this->mongoci->db->Items->count();
 
 	     
 
 	}
-		function new_chaildren($save){
-
-		   $query = $this->mongoci->db->Childrens->insert($save);
-		   return $query;
-           
-		   }
+		
 
       public function get_children($x,$y)
 		{
 
-         //  $this->mongoci->db->limit($limit, $start);
-			$query = $this->mongoci->db->Childrens->find()->limit($x)->skip($y);
+         
+			$query = $this->mongoci->db->Items->find()->limit($x)->skip($y);
 
             return $this->mongo_cursor($query);
 		}
 		
 		   			function ChildrenCount(){
 
-	       return $this->mongoci->db->Childrens->count();
+	       return $this->mongoci->db->Items->count();
 
 	     
 
@@ -164,8 +177,8 @@ class Online_Shoping_System_Model extends  CI_Model{
 
 		   		public function get_men($x,$y)
 		{
-
-			$query = $this->mongoci->db->Mens->find()->limit($x)->skip($y);
+           
+			$query = $this->mongoci->db->Items->find()->limit($x)->skip($y);
 
             return $this->mongo_cursor($query);
 		}
@@ -182,21 +195,10 @@ class Online_Shoping_System_Model extends  CI_Model{
 		
 	}
 
-		/*function user_login($uname,$pass){
-		$data['UserName']=$uname;
-		$data['Password']=$pass;
-		$this->db->where($data);
-		//$this->db->select('user_id');
-		$query=$this->db->get('Users');
-		if($query->num_rows()>0){
-			return $query->first_row();
-		} else {
-			return false;
-		}
-	}*/
+		
 		public function get_user()
 		{
-			$query = $this->mongoci->db->Users->find();
+			$query = $this->mongoci->db->Users->find()->sort( array('Name' =>-1  ));
             return $this->mongo_cursor($query);
 		}
 		public function remove_user($id)

@@ -18,35 +18,36 @@
 				</div>
 
 				<div class="col-md-6 p-b-30">
-					<form class="leave-comment" method="post" action="<?= base_url('index.php/Website_Controller/create_massage'); ?>" style="direction: rtl;">
+					<?php echo form_open('Website_Controller/create_massage',['name'=>'signup']);?>
 						<h4 class="m-text26 p-b-36 p-t-15">
 							پیام خودرا ارسال کنید
 						</h4>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="نام کامل" value="<?php echo set_value('fname')?>">
-							<?php echo form_error('fname')?>
+							
+							<?php echo form_input(['name'=>'fname','id'=>'fullname','placeholder'=>'Enter your full name','class'=>'form-control']);?>
+                             <?php echo form_error('fname','<div style="color:red">', '</div>'); ?>
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phone-number" placeholder="شماره تلفن" value="<?php echo set_value('mobile')?>">
-							<?php echo form_error('mobile')?>
+							<?php echo form_input(['name'=>'mobile','id'=>'fullname','placeholder'=>'Enter your full name','class'=>'form-control']);?>
+                             <?php echo form_error('mobile','<div style="color:red">', '</div>'); ?>
 						</div>
 
 						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="email" placeholder="ایمیل" value="<?php echo set_value('email')?>">
-							<?php echo form_error('email')?>
+							<?php echo form_input(['name'=>'email','id'=>'fullname','placeholder'=>'Enter your full name','class'=>'form-control']);?>
+                            <?php echo form_error('email','<div style="color:red">', '</div>'); ?>
 						</div>
-
-						<textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="message" placeholder="پیام" value="<?php echo set_value('SMS')?>"></textarea>
-						<?php echo form_error('SMS')?>
+                         <div class="bo4 of-hidden size15 m-b-20">
+						<?php echo form_textarea(['name'=>'SMS','rows'=>'5','cols'=>'10','id'=>'address','class'=>'form-control','placeholder'=>'Enter your address']);?>
+					</div>
 
 						<div class="w-size25">
-							<!-- Button -->
-							<input type="submit"  class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" value="ارسال">
+							<?php echo form_submit(['name'=>'submit','value'=>'Submit','class'=>'btn btn-custom btn-lg btn-block']);?>
+               
 							
 						</div>
-					</form>
+					 <?php echo form_close();?>
 				</div>
 			</div>
 		</div>

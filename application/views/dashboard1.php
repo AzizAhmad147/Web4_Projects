@@ -28,11 +28,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                     <?php if($this->session->has_userdata('login')){
-
-                  echo $user_login['Mobile'];
-                   }
-?>
+             این صفححه مومی است
    
                     </div>
                 </div>
